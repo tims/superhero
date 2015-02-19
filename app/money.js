@@ -1,0 +1,58 @@
+var Money = function (game, settings) {
+  this.id = 'money';
+  this.c = game.c;
+  this.gameSize = game.size;
+  this.size = {x: 10, y: 10};
+  this.gravity = 0.1;
+  this.ticks = 0;
+  this.value = 10;
+
+  this.velocity = {
+    x: 6,
+    y: settings.velocity.y
+  };
+
+  for (var i in settings) {
+    this[i] = settings[i];
+  }
+
+  this.draw = function (ctx) {
+    ctx.font = "20px Georgia";
+    ctx.fillStyle = '#000';
+    ctx.fillText('$', this.center.x - this.size.x / 2, this.center.y + this.size.y / 2);
+  };
+
+  this.update = function () {
+    this.ticks ++;
+    this.velocity.y += this.gravity;
+
+    this.center.x += this.velocity.x;
+    this.center.y += this.velocity.y;
+    if (this.center.x != Math.max(Math.min(this.center.x, this.gameSize.x - this.size.x / 2), this.size.x / 2)) {
+      this.c.entities.destroy(this);
+      console.log("destroyed");
+    }
+    if (this.center.y != Math.max(Math.min(this.center.y, this.gameSize.y - this.size.y / 2), this.size.y / 2)) {
+      this.center.y = Math.max(Math.min(this.center.y, this.gameSize.y - this.size.y / 2), this.size.y / 2);
+      if (this.ticks > 5) {
+        this.velocity = {
+          x: 0,
+          y: 0
+        };
+        this.dead = true;
+      }
+    }
+  };
+
+  this.collision = function (other) {
+    if (other.id === 'superhero') {
+      other.center.y = this.center.y; // follow the player
+
+      if (this.dead) {
+        game.score.score += this.value;
+        this.c.entities.destroy(this);
+      }
+    }
+  };
+
+};

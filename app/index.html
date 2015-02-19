@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <script type="text/javascript" src="../bower_components/coquette/coquette.js"></script>
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/lodash/lodash.js"></script>
+    <script type="text/javascript" src="../bower_components/d3/d3.js"></script>
+    <script type="text/javascript" src="money.js"></script>
+    <script type="text/javascript" src="message.js"></script>
     <script type="text/javascript" src="superhero.js"></script>
     <script type="text/javascript" src="giant.js"></script>
+    <script type="text/javascript" src="score-chart.js"></script>
+    <script type="text/javascript" src="score.js"></script>
+    <script type="text/javascript" src="stage.js"></script>
     <script type="text/javascript" src="game.js"></script>
+
+    <style>
+
+        body {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+        .line {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+    </style>
+
 </head>
-<body><canvas id="canvas"></canvas></body>
+<body>
+<h1>Your monees: $<span class="balance"></span>. Interest Rate: <span class="interestRate"></span>%</h1>
+
+<h2 class="message">...</h2>
+<svg></svg>
+<canvas id="canvas"></canvas>
 
 <div style="display:none;">
-    <img id="superhero" src="https://mdn.mozillademos.org/files/5397/rhino.jpg"
-         width="300" height="227">
+    <img id="superhero" src="images/superhero.png">
+    <img id="giant" src="images/giant.png">
 </div>
+</body>
+
 </html>
 
 
