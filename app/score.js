@@ -18,6 +18,11 @@ var Score = function() {
 
     this.updateScore();
     $(".balance").text((100 * this.score).toFixed(2));
+    if (this.interestRate <= 0) {
+      $(".performance").css('color', 'red')
+    } else {
+      $(".performance").css('color', 'black')
+    }
     $(".interestRate").text((this.interestRate * 100).toFixed(0));
   };
 };

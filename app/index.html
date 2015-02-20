@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="bower_components/pure/pure.css"/>
     <script type="text/javascript" src="../bower_components/coquette/coquette.js"></script>
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/lodash/lodash.js"></script>
     <script type="text/javascript" src="../bower_components/d3/d3.js"></script>
     <script type="text/javascript" src="money.js"></script>
     <script type="text/javascript" src="message.js"></script>
+    <script type="text/javascript" src="tax.js"></script>
     <script type="text/javascript" src="superhero.js"></script>
     <script type="text/javascript" src="giant.js"></script>
     <script type="text/javascript" src="score-chart.js"></script>
@@ -47,8 +47,8 @@
 </head>
 <body>
 <div style="text-align: center;">
-    <h1>Current Super Balance: $<span class="balance"></span>. Investment Performance: <span
-            class="interestRate"></span>%</h1>
+    <h1>Current Super Balance: $<span class="balance">0</span>. <span class="performance">Investment Performance: <span
+            class="interestRate">0</span>%</span></h1>
 
     <svg></svg>
     <br/>

@@ -1,7 +1,7 @@
 var ScoreChart = function (game) {
-  var margin = {top: 10, right: 20, bottom: 10, left: 50},
+  var margin = {top: 5, right: 20, bottom: 5, left: 50},
     width = 960 - margin.left - margin.right,
-    height = 150 - margin.top - margin.bottom;
+    height = 100 - margin.top - margin.bottom;
   this.ticks = 0;
 
   var parseDate = d3.time.format("%d-%b-%y").parse;

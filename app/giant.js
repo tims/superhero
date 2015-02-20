@@ -15,14 +15,34 @@ var Giant = function (game, settings) {
   }
   this.currentHealth = this.health;
 
+  this.ticks = 0;
+  this.shootInterval = 180 - 20 * settings.sizeMultiplier;
+
+  this.shoot = function () {
+    var dx = this.center.x - game.hero.center.x;
+    var dy = this.center.y - game.hero.center.y;
+    console.log('shooting');
+    this.c.entities.create(Tax, {
+      center: _.cloneDeep(this.center),
+      text: Math.random() > 0.3 ? 'TAX' : 'FEE',
+      velocity: {
+        x: 10 * Math.random() * (dx < 0 ? 1 : -1),
+        y: -3 - 5 * Math.random()
+      }
+    });
+  };
+
   this.draw = function (ctx) {
     var img = $("#giant").get(0);
     ctx.fillStyle = settings.color;
     ctx.drawImage(img, this.center.x - this.size.x / 2, this.center.y - this.size.y / 2, this.size.x, this.size.y);
-
   };
 
   this.update = function () {
+    this.ticks++;
+    if (this.ticks % this.shootInterval == 0) {
+      this.shoot();
+    }
     this.velocity.y += this.gravity;
 
     this.center.x += this.velocity.x;
