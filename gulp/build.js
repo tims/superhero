@@ -3,10 +3,12 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
+var mainBowerFiles = require('main-bower-files');
 
 gulp.task('build-wiredep-index', ['bower'], function () {
   return gulp.src('app/*.html')
     .pipe(wiredep({
+      ignorePath: '../',
       directory: 'bower_components'
     }))
     .pipe(gulp.dest('build'));
@@ -15,11 +17,11 @@ gulp.task('build-wiredep-index', ['bower'], function () {
 gulp.task('build-wiredep', ['build-wiredep-index']);
 
 gulp.task('build-inject', ['build-wiredep-index', 'build-scripts'], function () {
-  var scripts = gulp.src(['build/**/*.js', '!**/game.js'], {
+  var scripts = gulp.src(['scripts/*.js', '!**/game.js'], {
     read: false,
     cwd: 'build'
   });
-  var styles = gulp.src(['build/**/*.css'], {
+  var styles = gulp.src(['styles/**/*.css'], {
     read: false,
     cwd: 'build'
   });
@@ -32,8 +34,8 @@ gulp.task('build-inject', ['build-wiredep-index', 'build-scripts'], function () 
 
 gulp.task('build-copy-scripts', function () {
   return gulp
-    .src(['app/**/*.js'])
-    .pipe(gulp.dest('build/'));
+    .src(['app/scripts/**/*.js'])
+    .pipe(gulp.dest('build/scripts'));
 });
 
 gulp.task('build-copy-images', function () {
@@ -42,7 +44,12 @@ gulp.task('build-copy-images', function () {
     .pipe(gulp.dest('build/images'));
 });
 
-gulp.task('build-scripts', ['build-copy-scripts']);
+gulp.task('build-copy-bower', ['bower'], function() {
+  return gulp.src(mainBowerFiles(), { base: 'bower_components' })
+    .pipe(gulp.dest('build/bower_components'));
+});
+
+gulp.task('build-scripts', ['build-copy-scripts', 'build-copy-bower']);
 gulp.task('build-index', ['build-wiredep', 'build-inject']);
 gulp.task('build-assets', ['build-copy-images']);
 
