@@ -63,7 +63,7 @@ var Stage = function (game, settings) {
       this.spawnBoss();
     }
 
-    if (this.ticks % this.contributionsTick === 5) {
+    if (this.ticks % this.contributionsTick === 100) {
       this.spawnContributions();
     }
   };
