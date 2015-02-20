@@ -5,7 +5,8 @@ var Money = function (game, settings) {
   this.size = {x: 10, y: 10};
   this.gravity = 0.1;
   this.ticks = 0;
-  this.value = 10;
+  this.value = settings.value || 10;
+  this.maxTicks = 300;
 
   this.velocity = {
     x: 6,
@@ -25,6 +26,10 @@ var Money = function (game, settings) {
   this.update = function () {
     this.ticks ++;
     this.velocity.y += this.gravity;
+
+    if (this.ticks > this.maxTicks) {
+      this.c.entities.destroy(this);
+    }
 
     this.center.x += this.velocity.x;
     this.center.y += this.velocity.y;
@@ -46,8 +51,6 @@ var Money = function (game, settings) {
 
   this.collision = function (other) {
     if (other.id === 'superhero') {
-      other.center.y = this.center.y; // follow the player
-
       if (this.dead) {
         game.score.score += this.value;
         this.c.entities.destroy(this);

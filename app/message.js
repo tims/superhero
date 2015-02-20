@@ -7,6 +7,7 @@ var Message = function(game) {
   };
 
   this.setMessage = function(message, timeout) {
+    console.log(message, timeout);
     this.message = message;
     if (timeout) {
       var that = this;

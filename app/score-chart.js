@@ -1,7 +1,7 @@
 var ScoreChart = function (game) {
-  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+  var margin = {top: 10, right: 20, bottom: 10, left: 50},
     width = 960 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+    height = 150 - margin.top - margin.bottom;
   this.ticks = 0;
 
   var parseDate = d3.time.format("%d-%b-%y").parse;
@@ -33,11 +33,6 @@ var ScoreChart = function (game) {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-
-  svg.append("g")
     .attr("class", "y axis")
     .call(yAxis)
     .append("text")
@@ -45,7 +40,7 @@ var ScoreChart = function (game) {
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
-    .text("Price ($)");
+    .text("Balance ($)");
 
   svg.append("path")
     .attr("class", "line");
@@ -55,7 +50,7 @@ var ScoreChart = function (game) {
     if (this.ticks % 100 === 0) {
       this.data.push({
         date: new Date(),
-        balance: game.score.score
+        balance: game.score.score * 100
       });
     }
   };
@@ -63,10 +58,6 @@ var ScoreChart = function (game) {
   this.draw = function () {
     x.domain(d3.extent(this.data, function (d) { return d.date; }));
     y.domain(d3.extent([{balance: 0}].concat(this.data), function (d) { return d.balance; }));
-
-    xAxis.scale(x);
-    svg.select("g.x.axis")
-      .call(xAxis);
 
     yAxis.scale(y);
     svg.select("g.y.axis")

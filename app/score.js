@@ -1,5 +1,5 @@
 var Score = function() {
-  this.score = 1000;
+  this.score = 10;
   this.baseInterestRate = 0.1;
   this.marketForces = {};
 
@@ -17,7 +17,7 @@ var Score = function() {
     }, 0);
 
     this.updateScore();
-    $(".balance").text(this.score.toFixed(2));
+    $(".balance").text((100 * this.score).toFixed(2));
     $(".interestRate").text((this.interestRate * 100).toFixed(0));
   };
 };

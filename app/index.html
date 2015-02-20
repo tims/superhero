@@ -35,21 +35,33 @@
         .line {
             fill: none;
             stroke: steelblue;
-            stroke-width: 1.5px;
+            stroke-width: 3px;
+        }
+
+        .gameover-message, .message {
+            color: green;
         }
     </style>
 
 </head>
 <body>
-<h1>Your monees: $<span class="balance"></span>. Interest Rate: <span class="interestRate"></span>%</h1>
+<h1>Current Super Balance: $<span class="balance"></span>. Investment Performance: <span class="interestRate"></span>%</h1>
 
-<h2 class="message">...</h2>
 <svg></svg>
-<canvas id="canvas"></canvas>
+<br/>
+<div class="game">
+    <h1 class="message">...</h1>
+    <canvas id="canvas"></canvas>
 
-<div style="display:none;">
-    <img id="superhero" src="images/superhero.png">
-    <img id="giant" src="images/giant.png">
+    <div style="display:none;">
+        <img id="superhero" src="images/superhero.png">
+        <img id="giant" src="images/giant.png">
+    </div>
+</div>
+
+<div class="gameover" style="display:none">
+    <h1 class="gameover-message">Game over! Your retirement looks like: </h1>
+    <img class="gameover-image"/>
 </div>
 </body>
 
