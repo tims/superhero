@@ -1,3 +1,5 @@
+var giantId = 0;
+
 var Giant = function (game, settings) {
   this.c = game.c;
   this.gameSize = game.size;
@@ -7,7 +9,7 @@ var Giant = function (game, settings) {
   this.velocity = {x: 0, y: 0};
   this.interestRateForce = -0.1;
   this.stage = settings.stage;
-
+  var id = giantId++;
   for (var i in settings) {
     this[i] = settings[i];
   }
@@ -26,7 +28,7 @@ var Giant = function (game, settings) {
     this.center.x += this.velocity.x;
     this.center.y += this.velocity.y;
 
-    game.score.applyForce('boss', this.interestRateForce * this.sizeMultiplier);
+    game.score.applyForce('boss' + id, this.interestRateForce * this.sizeMultiplier);
     this.center.x = Math.max(Math.min(this.center.x, this.gameSize.x - this.size.x / 2), this.size.x / 2);
     this.center.y = Math.max(Math.min(this.center.y, this.gameSize.y - this.size.y / 2), this.size.y / 2);
   };
@@ -38,7 +40,7 @@ var Giant = function (game, settings) {
       this.velocity.y = -10;
       this.currentHealth--;
       if (this.currentHealth < 0) {
-        game.score.applyForce('boss', 0);
+        game.score.applyForce('boss' + id, 0);
         this.c.entities.destroy(this);
         _.each(_.range(this.health * 1.5), function () {
           game.c.entities.create(Money, {
@@ -49,7 +51,7 @@ var Giant = function (game, settings) {
             }
           });
         });
-        this.stage.end();
+        this.stage.bossDead();
       }
     }
   };

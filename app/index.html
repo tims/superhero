@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="bower_components/pure/pure.css"/>
     <script type="text/javascript" src="../bower_components/coquette/coquette.js"></script>
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/lodash/lodash.js"></script>
@@ -45,25 +46,30 @@
 
 </head>
 <body>
-<h1>Current Super Balance: $<span class="balance"></span>. Investment Performance: <span class="interestRate"></span>%</h1>
+<div style="text-align: center;">
+    <h1>Current Super Balance: $<span class="balance"></span>. Investment Performance: <span
+            class="interestRate"></span>%</h1>
 
-<svg></svg>
-<br/>
-<div class="game">
-    <h1 class="message">...</h1>
-    <canvas id="canvas"></canvas>
+    <svg></svg>
+    <br/>
 
-    <div style="display:none;">
-        <img id="superhero" src="images/superhero.png">
-        <img id="giant" src="images/giant.png">
+    <div class="game">
+        <h1 class="message">...</h1>
+        <canvas id="canvas"></canvas>
+
+        <div style="display:none;">
+            <img id="superhero" src="images/superhero.png">
+            <img id="giant" src="images/giant.png">
+        </div>
+    </div>
+
+    <div class="gameover" style="display:none">
+        <h1 class="gameover-message">Game over! Your retirement looks like: </h1>
+        <img class="gameover-image"/>
     </div>
 </div>
-
-<div class="gameover" style="display:none">
-    <h1 class="gameover-message">Game over! Your retirement looks like: </h1>
-    <img class="gameover-image"/>
-</div>
 </body>
+
 
 </html>
 

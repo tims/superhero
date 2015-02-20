@@ -1,6 +1,7 @@
 var Stage = function (game, settings) {
   this.c = game.c;
   this.ticks = 0;
+  this.bossCount = 1;
   this.bossSizeMultiplier = 1;
   this.bossMessages = {
     begin: 'Oh oh...',
@@ -18,18 +19,26 @@ var Stage = function (game, settings) {
 
   this.spawnBoss = function () {
     var that = this;
+
     game.boss = that.c.entities.create(Giant, {
       sizeMultiplier: this.bossSizeMultiplier,
       stage: that,
       center: {x: game.size.x * .8, y: game.size.y}, color: "#f07"
     });
+    if (this.bossCount == 2) {
+      game.boss = that.c.entities.create(Giant, {
+        sizeMultiplier: this.bossSizeMultiplier,
+        stage: that,
+        center: {x: game.size.x * .2, y: game.size.y}, color: "#f07"
+      });
+    }
   };
 
   this.spawnContributions = function () {
     _.each(_.range(this.numberOfDollars), function () {
       game.c.entities.create(Money, {
         center: {
-          x: game.size.x * Math.random() / 2,
+          x: game.size.x * Math.random() / 2 + game.size.x / 4,
           y: 30 + 100 * Math.random()
         },
         velocity: {
@@ -59,9 +68,12 @@ var Stage = function (game, settings) {
     }
   };
 
-  this.end = function () {
-    game.message.setMessage('Phew.. Crisis over!', 5000);
-    this.c.entities.destroy(this);
-    game.stageOver();
+  this.bossDead = function () {
+    this.bossCount--;
+    if (this.bossCount <= 0) {
+      game.message.setMessage('Phew.. Crisis over!', 5000);
+      this.c.entities.destroy(this);
+      game.stageOver();
+    }
   }
 };

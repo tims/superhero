@@ -18,8 +18,8 @@ var Money = function (game, settings) {
   }
 
   this.draw = function (ctx) {
-    ctx.font = "20px Georgia";
-    ctx.fillStyle = '#000';
+    ctx.font = "30px Georgia";
+    ctx.fillStyle = '#007a45';
     ctx.fillText('$', this.center.x - this.size.x / 2, this.center.y + this.size.y / 2);
   };
 

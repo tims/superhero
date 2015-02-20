@@ -38,8 +38,10 @@ var Game = function () {
       setTimeout(gameOver, 4000);
     } else {
       this.hero.levelup();
+      var bossCount = this.completedStages == 3 ? 2 : 1;
       this.stage = this.c.entities.create(Stage, {
         bossTick: 400,
+        bossCount: bossCount,
         bossSizeMultiplier: this.stage.bossSizeMultiplier + .5,
         contributionsTick: 400
       });
