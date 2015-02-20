@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../bower_components/coquette/coquette.js"></script>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/lodash/lodash.js"></script>
+    <script type="text/javascript" src="../bower_components/d3/d3.js"></script>
+    <script type="text/javascript" src="money.js"></script>
+    <script type="text/javascript" src="message.js"></script>
+    <script type="text/javascript" src="tax.js"></script>
+    <script type="text/javascript" src="superhero.js"></script>
+    <script type="text/javascript" src="giant.js"></script>
+    <script type="text/javascript" src="score-chart.js"></script>
+    <script type="text/javascript" src="score.js"></script>
+    <script type="text/javascript" src="stage.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+
+    <style>
+
+        body {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+        .line {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 3px;
+        }
+
+        .gameover-message, .message {
+            color: green;
+        }
+    </style>
+
+</head>
+<body>
+<div style="text-align: center;">
+    <h1>Current Super Balance: $<span class="balance">0</span>. <span class="performance">Investment Performance: <span
+            class="interestRate">0</span>%</span></h1>
+
+    <svg></svg>
+    <br/>
+
+    <div class="game">
+        <h1 class="message">...</h1>
+        <canvas id="canvas"></canvas>
+
+        <div style="display:none;">
+            <img id="superhero" src="images/superhero.png">
+            <img id="giant" src="images/giant.png">
+        </div>
+    </div>
+
+    <div class="gameover" style="display:none">
+        <h1 class="gameover-message">Game over! Your retirement looks like: </h1>
+        <img class="gameover-image"/>
+    </div>
+</div>
+</body>
+
+
+</html>
+
+
