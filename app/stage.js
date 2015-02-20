@@ -8,7 +8,7 @@ var Stage = function (game, settings) {
     fight: 'Here comes the financial crisis! Act quickly: reinvest your super to ensure prosperous retirement!'
   };
 
-  this.bossTick = 200;
+  this.bossTick = 1000;
 
   this.contributionsTick = 400;
   this.numberOfDollars = 5 * this.bossSizeMultiplier;
